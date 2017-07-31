@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sod>
+ <eventArm>
+    <fdsnEvent>
+        <originTimeRange>
+            <startTime>
+                <year>2014</year>
+                <month>10</month>
+                <day>1</day>
+            </startTime>
+            <endTime>
+                <year>2016</year>
+                <month>11</month>
+                <day>1</day>
+            </endTime>
+        </originTimeRange>
+        <magnitudeRange>
+            <min>5.75</min>
+        </magnitudeRange>
+    </fdsnEvent>
+<printlineEventProcess/>
+</eventArm>
+
+<networkArm>
+    <fdsnStation/>
+    <networkCode>7A</networkCode>    
+		<stationCode>*</stationCode>
+        <channelCode>BH*</channelCode>
+<printlineChannelProcess/>
+</networkArm>
+    
+<waveformArm>
+    <distanceRange>
+        <unit>DEGREE</unit>
+        <min>90</min>
+        <max>130</max>
+    </distanceRange>
+    <originOffsetRequest>
+        <beginOffset>
+        <unit>SECOND</unit>
+        <value>0</value>
+        </beginOffset>
+        <endOffset>
+        <unit>SECOND</unit>
+        <value>2400</value>
+        </endOffset>
+    </originOffsetRequest>
+    <fdsnDataSelect>
+        <user>juan.aragon@yale.edu</user>
+        <password>haLdk9klha3c</password>
+    </fdsnDataSelect>
+    <sacWriter>
+        <workingDir>seismograms</workingDir> 
+        
+        <location>${event.getTime("yyyy.DDD.HH.mm.ss")}.${event.name}.magnitude_${event.magnitudeValue}.depth_${event.depth}/${station.code}.${event.getTime("yyyy.DDD.HH.mm.ss")}.0000.${network.code}.${station.code}..${channel.code}.M.SAC</location>
+        
+        <phaseTimeHeader>
+            <model>prem</model>
+            <phaseName>SKS</phaseName>
+            <tHeader>a</tHeader>
+        </phaseTimeHeader>
+        
+    </sacWriter>
+<printlineSeismogramProcess/>
+</waveformArm>
+</sod>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sod>
+ <eventArm>
+    <fdsnEvent>
+        <originTimeRange>
+            <startTime>
+                <year>2013</year>
+                <month>10</month>
+                <day>1</day>
+            </startTime>
+            <endTime>
+                <year>2016</year>
+                <month>4</month>
+                <day>30</day>
+            </endTime>
+        </originTimeRange>
+        <magnitudeRange>
+            <min>5.75</min>
+        </magnitudeRange>
+    </fdsnEvent>
+<printlineEventProcess/>
+</eventArm>
+
+<networkArm>
+    <fdsnStation/>
+    <networkCode>7A</networkCode>
+    <stationOR>
+		<stationCode>CABN</stationCode>
+		<stationCode>ADAO</stationCode>
+    </stationOR>
+    <channelCode>BH*</channelCode>
+<printlineChannelProcess/>
+</networkArm>
+    
+<waveformArm>
+    <distanceRange>
+        <unit>DEGREE</unit>
+        <min>90</min>
+        <max>130</max>
+    </distanceRange>
+    <originOffsetRequest>
+        <beginOffset>
+        <unit>SECOND</unit>
+        <value>0</value>
+        </beginOffset>
+        <endOffset>
+        <unit>SECOND</unit>
+        <value>2400</value>
+        </endOffset>
+    </originOffsetRequest>
+    <fdsnDataSelect>
+        <user>juan.aragon@yale.edu</user>
+        <password>enter.password</password>
+    </fdsnDataSelect>
+    <sacWriter>
+        <workingDir>seismograms</workingDir>
+        <location>${station.code}/${event.getTime("yyyy.DDD.HH.mm.ss")}.${station.code}.SAC.${channel.code}</location>
+        <phaseTimeHeader>
+            <model>prem</model>
+            <phaseName>ttp</phaseName>
+            <tHeader>a</tHeader>
+        </phaseTimeHeader>
+        <sacHeaderScript type="jython">
+            from edu.sc.seis.seisFile.sac import SacConstants
+            h = sac.getHeader()
+            h.evdp = h.evdp/1000 # to make depth in km instead of meters
+        </sacHeaderScript>
+    </sacWriter>
+<printlineSeismogramProcess/>
+</waveformArm>
+</sod>
